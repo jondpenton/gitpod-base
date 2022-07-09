@@ -14,5 +14,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build image
         run: make build
-      - name: Push image
+      - name: Login
         run: echo $DOCKER_ACCESS_TOKEN | docker login -u jondpenton --password-stdin
+      - name: Push
+        run: make push
