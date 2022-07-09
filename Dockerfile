@@ -1,4 +1,4 @@
 FROM gitpod/workspace-full
 
-RUN brew install nushell
-RUN brew install starship
+RUN cargo install nu --features extra
+RUN cargo install starship --locked
