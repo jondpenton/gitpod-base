@@ -10,8 +10,7 @@ jobs:
     environment: release
     steps:
       - uses: actions/checkout@v3
-      # - name: Build image
-      #   run: make build
+            
       - name: Docker Login
         # You may pin to the exact commit or the version.
         # uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b
@@ -21,7 +20,13 @@ jobs:
           username: jondpenton # optional
           # Password or personal access token used to log against the Docker registry
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }} # optional
-      # - name: Login
-      #   run: echo $DOCKER_ACCESS_TOKEN | docker login -u jondpenton --password-stdin
-      # - name: Push Image
-      #   run: make push
+      
+      - name: Build and push Docker images
+        # You may pin to the exact commit or the version.
+        # uses: docker/build-push-action@e551b19e49efd4e98792db7592c17c09b89db8d8
+        uses: docker/build-push-action@v3.0.0
+        with:
+          # Push is a shorthand for --output=type=registry
+          push: true # optional, default is false
+          # List of tags
+          tags: jondpenton/gitpod-base:latest # optional
